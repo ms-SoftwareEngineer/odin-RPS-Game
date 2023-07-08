@@ -4,52 +4,39 @@ function getComputerChoice(){
     return choice[Math.floor(Math.random() * length)]
 }
 
-let flag = -Infinity
-function playRound(userSelection,computerSelection){
-    let user = userSelection.toLowerCase()
-    let computer = computerSelection
-    let status = ""
-    if(user === 'rock' && computer === 'scissor' && user === 'paper' && computer === 'scissor' && 
+let playerCurrentScore = 0, computerCurrentScore = 0
+function playRound(e){
+    let user = e.target.textContent.toLowerCase()
+    let computer = getComputerChoice()
+    let status = document.querySelector('.status')
+    let playerScore = document.querySelector('.playerScore')
+    let computerScore = document.querySelector('.computerScore')
+    if(user === 'rock' && computer === 'scissor' || user === 'paper' && computer === 'rock' || 
     user === 'scissor' && computer === 'paper'){
-        status = `You win! ${user} beats  ${computer}`
-        flag = 1
+        status.textContent = `You win! ${user} beats  ${computer}`
+        playerCurrentScore++
+        playerScore.textContent = playerCurrentScore
+        computerScore.textContent = computerCurrentScore
     }else if(user === computer){
-        status = `Draw Match...`
-        flag = 0
+        status.textContent = `Draw Match...`
+        playerScore.textContent = playerCurrentScore
+        computerScore.textContent = computerCurrentScore
     }else{
-        status = `You Lose! ${computer} beats ${user}`
-        flag = -1
+        status.textContent = `You Lose! ${computer} beats ${user}`
+        computerCurrentScore++
+        playerScore.textContent = playerCurrentScore
+        computerScore.textContent = computerCurrentScore
     }
-    return status
-}
-
-
-let userScore = 0, computerScore = 0
-function game(){
-    for(let i = 1; i <= 5; i++){
-        let userSelection = prompt('Enter you choice:\nRock\nPaper\nScissor')
-        let computerSelection = getComputerChoice()
-        let status = playRound(userSelection,computerSelection)
-        if(flag === 1){
-            console.log(status)
-            userScore++
-        } 
-        else if(flag === -1){
-            console.log(status)
-            computerScore++
-        }else{
-            console.log(status)
-        }
-    }
+    declareResult()
 }
 
 function declareResult(){
-    game()
-    if(userScore > computerScore) console.log('You Won the Game !!!')
-    else if(computerScore > userScore) console.log('You Lose the Game...')
-    else console.log('Draw Match')
-    console.log(userScore)
-    console.log(computerScore)
+    const finalResult = document.querySelector('.announce')
+    if(playerCurrentScore === 5) finalResult.textContent = "Player Wins!"
+    else if(computerCurrentScore === 5) finalResult.textContent = "Computer Wins!!"
+    else if(computerCurrentScore === 5 && playerCurrentScore === 5) finalResult.textContent ='Draw...' 
 }
-
-declareResult()
+const btn = document.querySelectorAll('button')
+btn.forEach((button) => {
+    button.addEventListener('click',playRound)
+})
