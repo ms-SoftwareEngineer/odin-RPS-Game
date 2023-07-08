@@ -4,8 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Odin RPS</title>
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <script src="script.js"></script>
+    <h1>Rock Paper Scissor</h1>
+    <div class="choice-container">
+        <button type="button" class="choice">Rock</button>
+        <button type="button" class="choice">Paper</button>
+        <button type="button" class="choice">Scissor</button>
+    </div>
+    <div class="results">
+        <p class="status"></p>
+        <div class="score">
+            <p class="player">Player Score: <span class="playerScore">0</span></p>
+            <p class="computer">Computer Score: <span class="computerScore">0</span></p>
+        </div>
+        <p class="announce"></p>
+    </div>
 </body>
 </html>
