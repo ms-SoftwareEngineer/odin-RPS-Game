@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 :root{
     --gradient: linear-gradient(
@@ -8,13 +7,13 @@
         slateblue,
         darkslateblue
     );
-    --h1Font: 'Lobster', cursive;
-    --h1Color: white;
     --bodyFont:'Poppins', sans-serif;
 }
 
 *{
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body{
@@ -25,6 +24,11 @@ body{
     background-size: 300%;
     font-size: 62.5%;
     font-family: var(--bodyFont);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
 }
 
 @keyframes bg-animation{
@@ -41,20 +45,17 @@ body{
     }
 }
 
-h1{
-    text-align: center;
-    font-family: var(--h1Font);
-    color: var(--h1Color);
-    font-weight: normal;
-    text-shadow: 5px 2px 2px brown;
-    font-size: 1.5rem;
-}
-
 .container{
     background-color: white;
-    padding: 1.5rem;
-    max-width: 320px;
-    margin: auto;
+    padding: 2.5rem;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 1.5rem;
+    box-shadow: 2px 2px 30px 4px rgba(60, 103, 108, 0.593);
+}
+
+.container.start .choice{
+    pointer-events: none;
 }
 
 .game-container{
@@ -62,19 +63,51 @@ h1{
     justify-content: space-around;
 }
 
-.game-container img{
-    width: 4rem;
-    height: 4rem;
+.playerChoice,.computerChoice{
+    width: 6rem;
+    height: 6rem;
     transform: rotate(90deg);
 }
 
-img[alt="computer"]{
+.container.start .playerChoice{
+    animation: userShake .5s ease infinite;
+    
+}
+
+@keyframes userShake{
+    0%{
+        transform: rotate(85deg);
+    }
+
+    50%{
+        transform: rotate(99deg);
+    }
+}
+
+.container.start .computerChoice{
+    animation: computerShake .5s ease infinite;
+}
+
+
+@keyframes computerShake{
+    0%{
+        transform: rotate(265deg) rotateY(175deg);
+    }
+
+    50%{
+        transform: rotate(279deg) rotateY(190deg);
+    }
+
+}
+
+.computerChoice{
     transform: rotate(270deg) rotateY(180deg);
 }
 
 .status{
     text-align: center;
     margin: 2.5rem auto;
+    font-size: 1.5rem;
 }
 
 .choice-container{
@@ -89,11 +122,26 @@ img[alt="computer"]{
     justify-content: center;
     align-items: center;
     opacity: 0.5;
+    transition: opacity 0.1s;
+}
+
+.choice:hover{
+    cursor:pointer;
+    opacity: 1;
+}
+
+.active{
+    opacity: 1;
 }
 
 .choice img{
-    width: 3rem;
-    height: 3rem;
+    width: 4rem;
+    height: 4rem;
+}
+
+.desc{
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
 .score{
@@ -104,6 +152,27 @@ img[alt="computer"]{
 }
 
 .player,.computer{
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     margin-top: 2.0rem;
+}
+
+.playerScore,.computerScore{
+    font-size: 1.5rem;
+    vertical-align: middle;
+    font-weight: bold;
+    margin-left: 1.0rem;
+}
+
+.container.new p{
+    font-size: 35px;
+    text-align: center;
+}
+
+.container.new button{
+    display: block;
+    width: 250px;
+    height: 50px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin: auto;
 }
