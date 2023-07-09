@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 :root{
     --gradient: linear-gradient(
         to right,
@@ -9,6 +10,11 @@
     );
     --h1Font: 'Lobster', cursive;
     --h1Color: white;
+    --bodyFont:'Poppins', sans-serif;
+}
+
+*{
+    box-sizing: border-box;
 }
 
 body{
@@ -17,6 +23,8 @@ body{
     background-attachment: fixed;
     animation: bg-animation 20s ease infinite 2s alternate;
     background-size: 300%;
+    font-size: 62.5%;
+    font-family: var(--bodyFont);
 }
 
 @keyframes bg-animation{
@@ -39,4 +47,63 @@ h1{
     color: var(--h1Color);
     font-weight: normal;
     text-shadow: 5px 2px 2px brown;
+    font-size: 1.5rem;
+}
+
+.container{
+    background-color: white;
+    padding: 1.5rem;
+    max-width: 320px;
+    margin: auto;
+}
+
+.game-container{
+    display: flex;
+    justify-content: space-around;
+}
+
+.game-container img{
+    width: 4rem;
+    height: 4rem;
+    transform: rotate(90deg);
+}
+
+img[alt="computer"]{
+    transform: rotate(270deg) rotateY(180deg);
+}
+
+.status{
+    text-align: center;
+    margin: 2.5rem auto;
+}
+
+.choice-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.choice{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.5;
+}
+
+.choice img{
+    width: 3rem;
+    height: 3rem;
+}
+
+.score{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.player,.computer{
+    font-size: 0.8rem;
+    margin-top: 2.0rem;
 }

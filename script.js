@@ -35,7 +35,4 @@ function declareResult(){
     if(playerCurrentScore === 5) finalResult.textContent = "Player Wins!"
     else finalResult.textContent = "Computer Wins!!"
 }
-const btn = document.querySelectorAll('button')
-btn.forEach((button) => {
-    button.addEventListener('click',playRound)
-})
+
