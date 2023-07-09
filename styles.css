@@ -19,7 +19,7 @@
 body{
     background-image: var(--gradient);
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: scroll;
     animation: bg-animation 20s ease infinite 2s alternate;
     background-size: 300%;
     font-size: 62.5%;
