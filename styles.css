@@ -19,7 +19,7 @@
 body{
     background-image: var(--gradient);
     background-repeat: no-repeat;
-    background-attachment: scroll;
+    background-attachment: fixed;
     animation: bg-animation 20s ease infinite 2s alternate;
     background-size: 300%;
     font-size: 62.5%;
@@ -29,7 +29,6 @@ body{
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    overflow-y: auto;
 }
 
 @keyframes bg-animation{
