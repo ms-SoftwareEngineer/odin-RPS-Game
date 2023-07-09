@@ -33,8 +33,7 @@ function playRound(e){
 function declareResult(){
     const finalResult = document.querySelector('.announce')
     if(playerCurrentScore === 5) finalResult.textContent = "Player Wins!"
-    else if(computerCurrentScore === 5) finalResult.textContent = "Computer Wins!!"
-    else if(computerCurrentScore === 5 && playerCurrentScore === 5) finalResult.textContent ='Draw...' 
+    else finalResult.textContent = "Computer Wins!!"
 }
 const btn = document.querySelectorAll('button')
 btn.forEach((button) => {
