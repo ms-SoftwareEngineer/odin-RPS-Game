@@ -48,13 +48,24 @@ choicesImage.forEach((choice,index) => {
         choicesImage.forEach((others,indices) => {
             if(index !== indices) choices[indices].classList.remove('active')
         });
+        playerResult.src = 'images/rock.svg'
+        computerResult.src = 'images/rock.svg'
         container.classList.add('start')
         status.textContent = "Loading.."
         setTimeout(() => {
             container.classList.remove('start')
             let user = choice.alt
             let computer= getComputerChoice()
-            console.log(user,'Vs',computer)
+            if(user === 'scissor'){
+                playerResult.src = `images/${user}.png`
+            }else{
+                playerResult.src = `images/${user}.svg`
+            }
+            if(computer === 'scissor'){
+                computerResult.src = `images/${computer}.png`
+            }else{
+                computerResult.src = `images/${computer}.svg`
+            }
             let playerScore = document.querySelector('.playerScore')
             let computerScore = document.querySelector('.computerScore')
             if(user === 'rock' && computer === 'scissor' || user === 'paper' && computer === 'rock' || 
