@@ -3,48 +3,57 @@ function getComputerChoice(){
     const length = choice.length
     return choice[Math.floor(Math.random() * length)]
 }
-const choicesImage = document.querySelectorAll('.choice img')
-const choices = document.querySelectorAll('.choice')
-const container = document.querySelector('.container')
-const playerResult = document.querySelector('.playerChoice')
-const computerResult = document.querySelector('.computerChoice')
-const innerContent = container.innerHTML
-const status = document.querySelector('.status')
+let choicesImage = document.querySelectorAll('.choice img')
+let choices = document.querySelectorAll('.choice')
+let container = document.querySelector('.container')
+let playerResult = document.querySelector('.playerChoice')
+let computerResult = document.querySelector('.computerChoice')
+let innerContent = container.innerHTML
+let status = document.querySelector('.status')
 let playerCurrentScore = 0 , computerCurrentScore = 0
+
 function declareResult(){
-    if(playerCurrentScore === 5){
+    if(playerCurrentScore === 5 || computerCurrentScore === 5 ){
         container.classList.add('new')
-        const newContent = document.querySelector('.container.new')
-        newContent.textContent = "Player Wins!"
+        let newContent = document.querySelector('.new')
+        newContent.textContent = playerCurrentScore === 5 ? 'Player Wins!':'Computer Wins!'
         newContent.style.fontSize = "35px"
         newContent.style.textAlign = "center"
-        const btn = document.createElement('button')
+        let btn = document.createElement('button')
         btn.textContent = "Play Again"
         newContent.append(btn)
-        btn.addEventListener('click',() => {
-            container.classList.remove('new')
-            newContent.innerHTML = innerContent
-        })
-    } 
-    else if(computerCurrentScore === 5){
-        container.classList.add('new')
-        const newContent = document.querySelector('.new')
-        newContent.textContent = "Computer Wins!"
-        newContent.style.fontSize = "35px"
-        newContent.style.textAlign = "center"
-        const btn = document.createElement('button')
-        btn.textContent = "Play Again"
-        newContent.append(btn)
-        btn.addEventListener('click',() => {
-            container.classList.remove('new')
-            newContent.innerHTML = innerContent
-        })
-    } 
+        btn.addEventListener('click',changeContent)
+    }  
 }
 
-choicesImage.forEach((choice,index) => {
-    choice.addEventListener('click',(e) => {
-        choices[index].classList.add('active')
+function changeContent(){
+    container.classList.remove('new')
+    container.innerHTML = innerContent
+    attachEvents();
+}
+
+function attachEvents(){
+    choicesImage = document.querySelectorAll('.choice img');
+    playerCurrentScore = 0 , computerCurrentScore = 0
+    choices = document.querySelectorAll('.choice')
+    container = document.querySelector('.container')
+    playerResult = document.querySelector('.playerChoice')
+    computerResult = document.querySelector('.computerChoice')
+    innerContent = container.innerHTML
+    status = document.querySelector('.status')
+    choicesImage.forEach((choice) => {
+        choice.addEventListener('click',game,true);
+    });
+}
+
+attachEvents();
+
+function game(e){
+    let index = -Infinity
+    if(e.target.alt === 'rock') index = 0
+    else if(e.target.alt === 'paper') index = 1
+    else if(e.target.alt === 'scissor') index = 2
+    choices[index].classList.add('active')
         choicesImage.forEach((others,indices) => {
             if(index !== indices) choices[indices].classList.remove('active')
         });
@@ -54,7 +63,7 @@ choicesImage.forEach((choice,index) => {
         status.textContent = "Loading.."
         setTimeout(() => {
             container.classList.remove('start')
-            let user = choice.alt
+            let user = e.target.alt
             let computer= getComputerChoice()
             if(user === 'scissor'){
                 playerResult.src = `images/${user}.png`
@@ -85,6 +94,5 @@ choicesImage.forEach((choice,index) => {
                 computerScore.textContent = computerCurrentScore
             }
             declareResult()
-        },2500)
-    })
-})
+        },500)
+}
